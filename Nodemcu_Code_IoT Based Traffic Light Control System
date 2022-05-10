@@ -1,0 +1,115 @@
+//INCLUDING HEADER FILES
+//#define BLYNK_PRINT Serial
+//#include <ESP8266WiFi.h>
+//#include<SPI.h>
+//#include <BlynkSimpleEsp8266.h>
+//#define BLYNK_TEMPLATE_ID "TMPLPc6Kzgc8"
+//#define BLYNK_DEVICE_NAME "Traffic Light"
+//
+//#define BLYNK_FIRMWARE_VERSION        "0.1.0"
+
+#define BLYNK_PRINT Serial
+#define APP_DEBUG
+
+#define BLYNK_PRINT Serial
+
+/* Fill-in your Template ID (only if using Blynk.Cloud) */
+#define BLYNK_TEMPLATE_ID   "TMPLPc6Kzgc8"
+// You should get Auth Token in the Blynk App.
+// Go to the Project Settings (nut icon).
+char auth[] = "5wRLxXFTnZEyI8qsdDQK8-MnjCBrlS8t";
+
+// Your WiFi credentials.
+// Set password to "" for open networks.
+char ssid[] = "project";
+char pass[] = "123456789";
+
+
+#include <ESP8266WiFi.h>
+#include "BlynkSimpleEsp8266.h"
+#define o_lght1 D5
+int pinValue0;
+int pinValue1;
+int pinValue2;
+int pinValue3;
+int pinValue4;
+BLYNK_WRITE(V0)
+{
+  pinValue0 = param.asInt();
+  if (pinValue0 == 1)
+  {
+//    digitalWrite(o_lght1, HIGH);
+    Serial.write('S');
+  }
+  if (pinValue0 == 0)
+  {
+//    digitalWrite(o_lght1, LOW);
+       Serial.write('a');
+  }
+   
+
+}
+BLYNK_WRITE(V1)
+{
+  pinValue1 = param.asInt();
+ if (pinValue1 == 1)
+  {
+//    digitalWrite(o_lght1, HIGH);
+    Serial.write('K');
+  }
+  if (pinValue1 == 0)
+  {
+//    digitalWrite(o_lght1, LOW);
+       Serial.write('L');
+  }
+}
+////BLYNK APP OPERATIONS
+BLYNK_WRITE(V2)
+{
+  pinValue2 = param.asInt();
+   if (pinValue2 == 1)
+  {
+
+    Serial.write('M');
+  }
+  if (pinValue2 == 0)
+  {
+
+       Serial.write('N');
+  }
+}
+BLYNK_WRITE(V3)
+{
+  pinValue3 = param.asInt();
+  if (pinValue3 == 1)
+  {
+    Serial.print('O');
+    
+  }
+  if (pinValue3 == 0)
+  {
+  Serial.write('P');
+  }
+
+ 
+}
+
+void setup()
+{
+  
+  Serial.begin(9600);
+
+ Blynk.begin(auth, ssid, pass);
+//  BlynkEdgent.begin();
+//
+//  Blynk.syncAll();
+
+}
+
+void loop()
+{
+  //Serial.println("IOT based Controlling of Hybrid Energy System using ESP8266");
+//   BlynkEdgent.run();
+  Blynk.run();
+//  timer.run();
+}
